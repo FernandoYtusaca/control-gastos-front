@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { api } from '@/services/api'
 import SummaryCards from '@/components/SummaryCards.vue'
+import TransactionList from '@/components/TransactionList.vue'
 
 const MONTHS = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -68,5 +69,6 @@ async function logout() {
     <p v-if="error" class="error">{{ error }}</p>
     <p v-else-if="loading && !summary" class="muted">Cargando...</p>
     <SummaryCards v-else-if="summary" :summary="summary" />
+    <TransactionList :month="month" :year="year" />
   </main>
 </template>
