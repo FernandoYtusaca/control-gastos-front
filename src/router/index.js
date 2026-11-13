@@ -22,6 +22,13 @@ const router = createRouter({
       component: () => import('@/views/RegisterView.vue'),
       meta: { guestOnly: true },
     },
+
+    {
+      path: '/categories',
+      name: 'categories',
+      component: () => import('@/views/CategoriesView.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

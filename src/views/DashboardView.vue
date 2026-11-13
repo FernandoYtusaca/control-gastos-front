@@ -1,19 +1,15 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 import { api } from '@/services/api'
 import SummaryCards from '@/components/SummaryCards.vue'
 import TransactionList from '@/components/TransactionList.vue'
 import TransactionForm from '@/components/TransactionForm.vue'
+import AppHeader from '@/components/AppHeader.vue'
 
 const MONTHS = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
 ]
-
-const auth = useAuthStore()
-const router = useRouter()
 
 const today = new Date()
 const month = ref(today.getMonth() + 1)
@@ -65,29 +61,15 @@ function onSaved(date) {
   }
 }
 
-onMounted(() => {
-  if (!auth.user) auth.fetchUser()
-  loadSummary()
-})
+onMounted(loadSummary)
 
 watch([month, year], loadSummary)
 
-async function logout() {
-  await auth.logout()
-  router.push({ name: 'login' })
-}
 </script>
 
 <template>
   <main class="page">
-    <header class="topbar">
-      <h1>Control de Gastos</h1>
-      <div>
-        <span v-if="auth.user">{{ auth.user.name }}</span>
-        <button class="secondary" @click="logout">Cerrar sesión</button>
-      </div>
-    </header>
-
+    <AppHeader />
     <section class="filters">
       <select v-model="month">
         <option v-for="(name, i) in MONTHS" :key="i" :value="i + 1">{{ name }}</option>
