@@ -53,3 +53,39 @@ button.secondary:hover { background: #d1d5db; }
 .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 1rem; }
 .topbar h1 { margin: 0; }
 .topbar div { display: flex; align-items: center; gap: 0.75rem; }
+
+.filters { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+.filters input[type='number'] { width: 100px; }
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat, .panel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
+}
+
+.stat { padding: 1rem 1.25rem; display: grid; gap: 0.25rem; }
+.stat span { font-size: 0.85rem; color: #6b7280; }
+.stat strong { font-size: 1.5rem; }
+.stat.income strong, .income-text { color: #059669; }
+.stat.expense strong, .expense-text { color: #dc2626; }
+
+.panel { padding: 1.25rem; }
+.panel h2 { margin: 0 0 0.75rem; font-size: 1.1rem; }
+
+.category-list { list-style: none; margin: 0; padding: 0; }
+.category-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.category-list li:last-child { border-bottom: 0; }
+
+.muted { color: #6b7280; }
