@@ -6,7 +6,9 @@ import { formatAmount, formatDate } from '@/utils/format'
 const props = defineProps({
   month: { type: Number, required: true },
   year: { type: [Number, String], required: true },
+  refreshKey: { type: Number, default: 0 },
 })
+const emit = defineEmits(['edit', 'changed'])
 
 const categories = ref([])
 const type = ref('')
@@ -41,6 +43,20 @@ async function loadTransactions() {
   }
 }
 
+async function remove(t) {
+  if (!confirm(`¿Eliminar "${t.description || t.category.name}"?`)) return
+
+  try {
+    await api.delete(`/transactions/${t.id}`)
+    // Si era el único elemento de la última página, retrocede una página
+    if (result.value.data.length === 1 && page.value > 1) page.value--
+    else await loadTransactions()
+    emit('changed')
+  } catch {
+    error.value = 'No se pudo eliminar la transacción.'
+  }
+}
+
 onMounted(async () => {
   try {
     categories.value = await api.get('/categories')
@@ -50,13 +66,13 @@ onMounted(async () => {
   loadTransactions()
 })
 
-// Al cambiar un filtro se vuelve a la página 1
 watch([() => props.month, () => props.year, type, categoryId], () => {
   if (page.value !== 1) page.value = 1
   else loadTransactions()
 })
 
 watch(page, loadTransactions)
+watch(() => props.refreshKey, loadTransactions)
 </script>
 
 <template>
@@ -90,6 +106,7 @@ watch(page, loadTransactions)
             <th>Categoría</th>
             <th>Descripción</th>
             <th class="amount">Monto</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -99,6 +116,10 @@ watch(page, loadTransactions)
             <td>{{ t.description || '—' }}</td>
             <td class="amount" :class="t.category.type === 'income' ? 'income-text' : 'expense-text'">
               {{ t.category.type === 'income' ? '+' : '-' }}{{ formatAmount(t.amount) }}
+            </td>
+            <td class="actions">
+              <button class="link" @click="$emit('edit', t)">Editar</button>
+              <button class="link danger" @click="remove(t)">Eliminar</button>
             </td>
           </tr>
         </tbody>

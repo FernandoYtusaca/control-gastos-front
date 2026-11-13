@@ -129,3 +129,22 @@ button.secondary:hover { background: #d1d5db; }
   gap: 1rem;
   margin-top: 1rem;
 }
+
+.push-right { margin-left: auto; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.table .actions { text-align: right; white-space: nowrap; }
+
+button.link { background: none; color: #4f46e5; padding: 0.25rem 0.5rem; font-size: 0.9rem; }
+button.link:hover { background: #eef2ff; }
+button.link.danger { color: #dc2626; }
+button.link.danger:hover { background: #fef2f2; }
