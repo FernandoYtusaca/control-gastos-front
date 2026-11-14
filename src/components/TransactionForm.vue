@@ -22,9 +22,7 @@ const errors = ref({})
 const message = ref('')
 const loading = ref(false)
 
-const visibleCategories = computed(() =>
-  categories.value.filter((c) => c.type === type.value),
-)
+const visibleCategories = computed(() => categories.value.filter((c) => c.type === type.value))
 
 onMounted(async () => {
   try {

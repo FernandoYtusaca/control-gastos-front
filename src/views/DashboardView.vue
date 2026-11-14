@@ -7,8 +7,18 @@ import TransactionForm from '@/components/TransactionForm.vue'
 import AppHeader from '@/components/AppHeader.vue'
 
 const MONTHS = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
 ]
 
 const today = new Date()
@@ -64,7 +74,6 @@ function onSaved(date) {
 onMounted(loadSummary)
 
 watch([month, year], loadSummary)
-
 </script>
 
 <template>

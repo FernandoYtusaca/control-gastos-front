@@ -52,7 +52,12 @@ async function submit() {
 
       <label>
         Confirmar contraseña
-        <input v-model="form.password_confirmation" type="password" required autocomplete="new-password" />
+        <input
+          v-model="form.password_confirmation"
+          type="password"
+          required
+          autocomplete="new-password"
+        />
       </label>
 
       <p v-if="message" class="error">{{ message }}</p>

@@ -22,13 +22,14 @@ async function request(path, { method = 'GET', body, params } = {}) {
   const headers = { Accept: 'application/json' }
   const token = localStorage.getItem('token')
   if (token) headers.Authorization = `Bearer ${token}`
-  if (body) headers['Content-Type'] = 'application/json'
 
-  const response = await fetch(url, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  })
+  const options = { method, headers }
+  if (body) {
+    headers['Content-Type'] = 'application/json'
+    options.body = JSON.stringify(body)
+  }
+
+  const response = await fetch(url, options)
 
   if (response.status === 204) return null
 

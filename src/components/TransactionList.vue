@@ -114,7 +114,10 @@ watch(() => props.refreshKey, loadTransactions)
             <td>{{ formatDate(t.date) }}</td>
             <td>{{ t.category.name }}</td>
             <td>{{ t.description || '—' }}</td>
-            <td class="amount" :class="t.category.type === 'income' ? 'income-text' : 'expense-text'">
+            <td
+              class="amount"
+              :class="t.category.type === 'income' ? 'income-text' : 'expense-text'"
+            >
               {{ t.category.type === 'income' ? '+' : '-' }}{{ formatAmount(t.amount) }}
             </td>
             <td class="actions">
